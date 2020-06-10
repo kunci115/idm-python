@@ -13,6 +13,9 @@ def idm_api():
         mem = tcp_handler(fixed_length)
         return jsonify(mem)
 
+@app.route('/', methods=['GET'])
+def home():
+    return Response("Welcome to indomaret testing api built with python")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3333)
