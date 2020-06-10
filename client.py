@@ -32,10 +32,22 @@ def prepare_to_tcp(data):
         switch_code = "RAPI"
         counter = 0000
         n = 0
-        data = header_component + switch_code + time_now + f'{n:06}' + "TOKO" +\
-               "  " + "IDMCSHO" + time_stamp + client_id+ "    " + key + "    " + branch_id +\
-               counter_id + product_type + "    " + trx_type + "                       " + \
-               get_detail_trx_id + get_detail_token + no_hp + "    " + amount + "                   "
+        if trx_type == "CASHOUT":
+            data = header_component + switch_code + time_now + f'{n:06}' + "TOKO" +\
+                   "  " + "IDMCSHO" + time_stamp + client_id+ "    " + key + "    " + branch_id +\
+                   counter_id + product_type + "    " + trx_type + "                       " + \
+                   get_detail_trx_id + get_detail_token + no_hp + "    " + amount + "                   "
+        elif trx_type == "REVERSAL":
+            data = header_component + switch_code + time_now + f'{n:06}' + "TOKO" + \
+                   "  " + "IDMREVS" + time_stamp + client_id + "    " + key + "    " + branch_id + \
+                   counter_id + product_type + "    " + trx_type + "                      " + \
+                   get_detail_trx_id + get_detail_token + no_hp + "    " + amount + "                   "
+        elif trx_type == "NOTIFICATION":
+            data = header_component + switch_code + time_now + f'{n:06}' + "TOKO" + \
+                   "  " + "IDMNOTF" + time_stamp + client_id + "    " + key + "    " + branch_id + \
+                   counter_id + product_type + "    " + trx_type + "                  " + \
+                   get_detail_trx_id + get_detail_token + no_hp + "    " + amount + "                   "
+
         return data
     except ValueError as e:
         return e.args
