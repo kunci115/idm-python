@@ -15,4 +15,4 @@ def idm_api():
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.88.230', port=3333)
+    app.run(host='0.0.0.0', port=3333)
